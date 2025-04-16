@@ -13,6 +13,8 @@ _main() {
     _log "info" "Git checkout at: ${INPUT_REPOSITORY}, branch: ${INPUT_BRANCH}";
     cd "$INPUT_REPOSITORY";
 
+    _log "info" "Get full history of branch: ${INPUT_BRANCH}";
+    git fetch --unshallow origin ${INPUT_BRANCH};
     git status;
 
     # if _git_is_dirty || "$INPUT_SKIP_DIRTY_CHECK"; then
