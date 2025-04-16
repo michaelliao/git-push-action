@@ -1,0 +1,24 @@
+# This workflow sync the current github repo to a remote repo by using 'git push'.
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Push to remote repo
+        uses: michaelliao/git-push-action@v1
+        with:
+          ssh_key: "SSH_PRIVATE_KEY ABC"
+          ssh_key_pub: "SSH_PUBLIC_KEY ABC"
+          remote_repository: "git@gitlab.com:askxuefeng/git-push-action.git"
+          push_options: "--force"

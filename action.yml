@@ -1,0 +1,35 @@
+name: Git Push To Remote Action
+description: Push GitHub repository to remote repository.
+
+author: Crypto Michael
+
+inputs:
+  repository:
+    description: Local file path to the git repository. Default to current directory.
+    required: false
+    default: "."
+  branch:
+    description: Git branch name.
+    required: false
+    default: ${{ github.head_ref }}
+  ssh_key:
+    description: SSH private key used to push to the remote repository.
+    required: true
+  ssh_key_pub:
+    description: SSH public key used to push to the remote repository.
+    required: true
+  remote_repository:
+    description: Remote repository. For example `git@gitlab.com:askxuefeng/git-push-action.git`.
+    required: true
+  push_options:
+    description: Option for git push. For example `--force` or `--tags`.
+    required: false
+    default: ""
+
+runs:
+  using: node20
+  main: index.js
+
+branding:
+  icon: corner-up-right
+  color: green

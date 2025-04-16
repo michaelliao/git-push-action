@@ -1,0 +1,7 @@
+{
+  "name": "git-push-action",
+  "version": "1.0.0",
+  "description": "Git push action",
+  "main": "index.js",
+  "author": "Crypto Michael"
+}
