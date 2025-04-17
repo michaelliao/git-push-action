@@ -30,6 +30,21 @@ jobs:
           push_options: "--force"
 ```
 
+Multiple remote repositories can be added:
+
+```
+      - name: Push to remote repo
+        uses: michaelliao/git-push-action@v3
+        env:
+          PUSH_SSH_KEY: ${{ secrets.PUSH_SSH_KEY }}
+        with:
+          remote_repository: |
+            git@gitlab.com:cryptomichael/git-push-action.git
+            git@gitee.com:liaoxuefeng/git-push-action.git
+```
+
+## Note
+
 You must add environment secrets `PUSH_SSH_KEY` to your SSH private key file content.
 
 It is highly recommended to generate an SSH key that only used for sync:
