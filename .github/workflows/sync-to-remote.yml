@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Push to remote repo
-        uses: michaelliao/git-push-action@v1.2
+        uses: michaelliao/git-push-action@v2
         env:
           PUSH_PRIVATE_KEY: ${{ secrets.PUSH_PRIVATE_KEY }}
           PUSH_PUBLIC_KEY: ${{ secrets.PUSH_PUBLIC_KEY }}
