@@ -22,8 +22,9 @@ _push() {
     fi
 
     # do git push:
-    git remote add tmp_origin_052d ${repo}
-    GIT_SSH_COMMAND="ssh -i ~/.ssh/tmp_ssh_push_key_rsa" git push tmp_origin_052d ${INPUT_PUSH_OPTIONS} ${branch}
+    origin=$(echo -n "${repo}" | md5sum | cut -c1-7)
+    git remote add tmp${origin} ${repo}
+    GIT_SSH_COMMAND="ssh -i ~/.ssh/tmp_ssh_push_key_rsa" git push tmp${origin} ${INPUT_PUSH_OPTIONS} ${branch}
 
     _log "info" "Git push successfully to: ${repo}"
 }
@@ -47,9 +48,9 @@ _main() {
     chmod 600 ~/.ssh/tmp_ssh_push_key_rsa
     echo "$PUSH_PUBLIC_KEY" > ~/.ssh/tmp_ssh_push_key_rsa.pub
 
-    repos="${INPUT_REMOTE_REPOSITORY}"
-    for repo in $repos; do
-        echo "Processing $repo."
+    repositories="${INPUT_REMOTE_REPOSITORY}"
+    for repository in $repositories; do
+        _push ${current_branch} ${repository}
     done
 }
 
