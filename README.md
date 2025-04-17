@@ -31,10 +31,7 @@ jobs:
           push_options: "--force"
 ```
 
-You must add environment secrets:
-
-- PUSH_PRIVATE_KEY: your SSH key file content;
-- PUSH_PUBLIC_KEY: your SSH key pub file content.
+You must add environment secrets `PUSH_SSH_KEY`: your SSH private key file content.
 
 It is highly recommended to generate an SSH key that only used for sync:
 
