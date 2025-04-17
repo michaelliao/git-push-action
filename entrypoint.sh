@@ -22,12 +22,7 @@ _main() {
     _log "info" "Get full history of branch: ${current_branch}";
     git fetch --unshallow origin ${current_branch};
 
-
-    # if _git_is_dirty || "$INPUT_SKIP_DIRTY_CHECK"; then
-
-    #     _set_github_output "changes_detected" "true"
-
-    #     _switch_to_branch
+    _log "info" "Push to remote repository: ${INPUT_REMOTE_REPOSITORY}";
 
     #     _add_files
 
