@@ -8,21 +8,11 @@ inputs:
     description: Local file path to the git repository. Default to current directory.
     required: false
     default: "."
-  branch:
-    description: Git branch name.
-    required: false
-    default: ${{ github.head_ref }}
-  ssh_key:
-    description: SSH private key used to push to the remote repository.
-    required: true
-  ssh_key_pub:
-    description: SSH public key used to push to the remote repository.
-    required: true
   remote_repository:
-    description: Remote repository. For example `git@gitlab.com:askxuefeng/git-push-action.git`.
+    description: Remote repository. For example `git@gitlab.com:cryptomichael/git-push-action.git`.
     required: true
   push_options:
-    description: Option for git push. For example `--force` or `--tags`.
+    description: Option for git push. For example `--force` or `--force --tags`.
     required: false
     default: ""
 
