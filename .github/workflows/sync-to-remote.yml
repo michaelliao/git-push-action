@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Push to remote repo
-        uses: michaelliao/git-push-action@latest
+        uses: michaelliao/git-push-action@v1.1
         with:
           remote_repository: "git@gitlab.com:cryptomichael/git-push-action.git"
           push_options: "--force"
