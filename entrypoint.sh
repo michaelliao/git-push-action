@@ -46,7 +46,7 @@ _main() {
     mkdir -p ~/.ssh
     echo "$PUSH_SSH_KEY" > ~/.ssh/tmp_ssh_push_key
     chmod 600 ~/.ssh/tmp_ssh_push_key
-    ssh-keygen -y -f tmp_ssh_push_key > ~/.ssh/tmp_ssh_push_key.pub
+    ssh-keygen -y -f ~/.ssh/tmp_ssh_push_key > ~/.ssh/tmp_ssh_push_key.pub
 
     repositories="${INPUT_REMOTE_REPOSITORY}"
     for repository in $repositories; do
