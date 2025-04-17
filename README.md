@@ -1,6 +1,6 @@
 # git-push-action
 
-Execute classic `git push` to any remote git repository to keep automatically sync from GitHub repository.
+Execute classic `git push` to any remote git repository to keep automatically sync from GitHub repository to third-party.
 
 ## Usage
 
@@ -22,16 +22,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Push to remote repo
-        uses: michaelliao/git-push-action@v2
+        uses: michaelliao/git-push-action@v3
         env:
-          PUSH_PRIVATE_KEY: ${{ secrets.PUSH_PRIVATE_KEY }}
-          PUSH_PUBLIC_KEY: ${{ secrets.PUSH_PUBLIC_KEY }}
+          PUSH_SSH_KEY: ${{ secrets.PUSH_SSH_KEY }}
         with:
           remote_repository: "git@gitlab.com:cryptomichael/git-push-action.git"
           push_options: "--force"
 ```
 
-You must add environment secrets `PUSH_SSH_KEY`: your SSH private key file content.
+You must add environment secrets `PUSH_SSH_KEY` to your SSH private key file content.
 
 It is highly recommended to generate an SSH key that only used for sync:
 
