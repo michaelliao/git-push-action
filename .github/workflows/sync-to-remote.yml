@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Push to remote repo
-        uses: michaelliao/git-push-action@v2.4
+        uses: michaelliao/git-push-action@v3
         env:
           PUSH_SSH_KEY: ${{ secrets.PUSH_SSH_KEY }}
         with:
