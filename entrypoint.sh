@@ -24,7 +24,7 @@ _push() {
     # do git push:
     origin=$(echo -n "${repo}" | md5sum | cut -c1-7)
     git remote add tmp${origin} ${repo}
-    GIT_SSH_COMMAND="ssh -i ~/.ssh/tmp_ssh_push_key_rsa" git push tmp${origin} ${INPUT_PUSH_OPTIONS} ${branch}
+    GIT_SSH_COMMAND="ssh -i ~/.ssh/tmp_ssh_push_key" git push tmp${origin} ${INPUT_PUSH_OPTIONS} ${branch}
 
     _log "info" "Git push successfully to: ${repo}"
 }
@@ -44,9 +44,9 @@ _main() {
 
     _log "info" "Write SSH key."
     mkdir -p ~/.ssh
-    echo "$PUSH_PRIVATE_KEY" > ~/.ssh/tmp_ssh_push_key_rsa
-    chmod 600 ~/.ssh/tmp_ssh_push_key_rsa
-    echo "$PUSH_PUBLIC_KEY" > ~/.ssh/tmp_ssh_push_key_rsa.pub
+    echo "$PUSH_SSH_KEY" > ~/.ssh/tmp_ssh_push_key
+    chmod 600 ~/.ssh/tmp_ssh_push_key
+    ssh-keygen -y -f tmp_ssh_push_key > ~/.ssh/tmp_ssh_push_key.pub
 
     repositories="${INPUT_REMOTE_REPOSITORY}"
     for repository in $repositories; do
