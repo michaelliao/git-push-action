@@ -9,6 +9,25 @@ _log() {
     echo "::${level}::${message}";
 }
 
+_push() {
+    local branch=${1}
+    local repo=${2}
+    _log "info" "Push to remote repository: ${repo}"
+    if [[ "${repo}" =~ ^git@.*:.* ]]; then
+        remote_host=$(echo "${repo}" | sed -E 's/.*@(.*):.*/\1/')
+        ssh-keyscan -t rsa "${remote_host}" >> ~/.ssh/known_hosts
+    else
+        _log "error" "Not a valid repository: ${repo}"
+        exit 1
+    fi
+
+    # do git push:
+    git remote add tmp_origin_052d ${repo}
+    GIT_SSH_COMMAND="ssh -i ~/.ssh/tmp_ssh_push_key_rsa" git push tmp_origin_052d ${INPUT_PUSH_OPTIONS} ${branch}
+
+    _log "info" "Git push successfully to: ${repo}"
+}
+
 _main() {
     _log "info" "Git checkout at: ${INPUT_REPOSITORY}"
     cd "${INPUT_REPOSITORY}"
@@ -22,26 +41,16 @@ _main() {
     _log "info" "Get full history of branch: ${current_branch}"
     git fetch --unshallow origin ${current_branch}
 
-    _log "info" "Push to remote repository: ${INPUT_REMOTE_REPOSITORY}"
-    if [[ "${INPUT_REMOTE_REPOSITORY}" =~ ^git@.*:.* ]]; then
-        remote_host=$(echo "${INPUT_REMOTE_REPOSITORY}" | sed -E 's/.*@(.*):.*/\1/')
-        mkdir -p ~/.ssh
-        ssh-keyscan -t rsa "${remote_host}" >> ~/.ssh/known_hosts
-    else
-        _log "error" "Not a valid repository: ${INPUT_REMOTE_REPOSITORY}"
-        exit 1
-    fi
-
-    # write ssh key:
+    _log "info" "Write SSH key."
+    mkdir -p ~/.ssh
     echo "$PUSH_PRIVATE_KEY" > ~/.ssh/tmp_ssh_push_key_rsa
     chmod 600 ~/.ssh/tmp_ssh_push_key_rsa
     echo "$PUSH_PUBLIC_KEY" > ~/.ssh/tmp_ssh_push_key_rsa.pub
 
-    # do git push:
-    git remote add tmp_origin ${INPUT_REMOTE_REPOSITORY}
-    GIT_SSH_COMMAND="ssh -i ~/.ssh/tmp_ssh_push_key_rsa" git push tmp_origin ${INPUT_PUSH_OPTIONS} ${current_branch}
-
-    _log "info" "Git push successfully."
+    repos="${INPUT_REMOTE_REPOSITORY}"
+    for repo in $repos; do
+        echo "Processing $repo."
+    done
 }
 
 _main
