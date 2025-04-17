@@ -18,7 +18,5 @@ jobs:
       - name: Push to remote repo
         uses: michaelliao/git-push-action@v1
         with:
-          ssh_key: "SSH_PRIVATE_KEY ABC"
-          ssh_key_pub: "SSH_PUBLIC_KEY ABC"
-          remote_repository: "git@gitlab.com:askxuefeng/git-push-action.git"
+          remote_repository: "git@gitlab.com:cryptomichael/git-push-action.git"
           push_options: "--force"
