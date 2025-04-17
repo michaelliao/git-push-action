@@ -10,12 +10,18 @@ _log() {
 }
 
 _main() {
-    _log "info" "Git checkout at: ${INPUT_REPOSITORY}, branch: ${INPUT_BRANCH}";
+    _log "info" "Git checkout at: ${INPUT_REPOSITORY}";
     cd "$INPUT_REPOSITORY";
 
-    _log "info" "Get full history of branch: ${INPUT_BRANCH}";
-    git fetch --unshallow origin ${INPUT_BRANCH};
-    git status;
+    current_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null);
+    if [ -z "$current_branch" ] || [ "$current_branch" == "HEAD" ]; then
+        _log "error" "Not a valid branch: ${current_branch}";
+        exit 1
+    fi
+
+    _log "info" "Get full history of branch: ${current_branch}";
+    git fetch --unshallow origin ${current_branch};
+
 
     # if _git_is_dirty || "$INPUT_SKIP_DIRTY_CHECK"; then
 
