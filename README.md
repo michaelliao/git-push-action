@@ -27,6 +27,7 @@ jobs:
           PUSH_SSH_KEY: ${{ secrets.PUSH_SSH_KEY }}
         with:
           remote_repository: "git@gitlab.com:cryptomichael/git-push-action.git"
+          # optinal: set push options, default to "":
           push_options: "--force"
 ```
 
