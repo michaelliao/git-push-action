@@ -1,6 +1,6 @@
 # git-push-action
 
-Execute classic `git push` to any remote git repository to keep automatically sync from GitHub repository to third-party.
+The `git-push-action` is a GitHub Action designed to synchronize GitHub repositories with one or more remote Git repositories. This action executes standard Git push operations to automatically keep third-party repositories in sync with your GitHub repository.
 
 ## Usage
 
@@ -54,4 +54,4 @@ It is highly recommended to generate an SSH key that only used for sync:
 $ ssh-keygen -N "" -t rsa -C "sync-from-github@github.com" -f "github_sync_ssh_key"
 ```
 
-And don't forget add your SSH pub key to the remote repository.
+And don't forget add your SSH pub key to all remote repositories you want to push to.
