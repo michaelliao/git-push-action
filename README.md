@@ -48,7 +48,7 @@ Multiple remote repositories can be added:
 
 You must add environment secrets `PUSH_SSH_KEY` to your SSH private key file content.
 
-It is highly recommended to generate an SSH key that only used for sync:
+It is highly recommended to generate an SSH key that only used for sync action:
 
 ```
 $ ssh-keygen -N "" -t rsa -C "sync-from-github@github.com" -f "github_sync_ssh_key"
